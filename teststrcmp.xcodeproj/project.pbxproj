@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		222CD1841FD397AB0078396F /* cnet.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD1821FD397AB0078396F /* cnet.c */; };
 		222CD1871FD398500078396F /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD1851FD398500078396F /* server.c */; };
-		222CD18D1FD4599C0078396F /* adlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD18B1FD4599C0078396F /* adlist.c */; };
-		222CD2491FD47A290078396F /* zmalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD2471FD47A290078396F /* zmalloc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,10 +29,6 @@
 		222CD1831FD397AB0078396F /* cnet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cnet.h; sourceTree = "<group>"; };
 		222CD1851FD398500078396F /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
 		222CD1861FD398500078396F /* server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
-		222CD18B1FD4599C0078396F /* adlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adlist.c; sourceTree = "<group>"; };
-		222CD18C1FD4599C0078396F /* adlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adlist.h; sourceTree = "<group>"; };
-		222CD2471FD47A290078396F /* zmalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zmalloc.c; sourceTree = "<group>"; };
-		222CD2481FD47A290078396F /* zmalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmalloc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,14 +61,10 @@
 		222CD17A1FCDAD7C0078396F /* teststrcmp */ = {
 			isa = PBXGroup;
 			children = (
-				222CD2471FD47A290078396F /* zmalloc.c */,
-				222CD2481FD47A290078396F /* zmalloc.h */,
 				222CD1821FD397AB0078396F /* cnet.c */,
 				222CD1831FD397AB0078396F /* cnet.h */,
 				222CD1851FD398500078396F /* server.c */,
 				222CD1861FD398500078396F /* server.h */,
-				222CD18B1FD4599C0078396F /* adlist.c */,
-				222CD18C1FD4599C0078396F /* adlist.h */,
 			);
 			path = teststrcmp;
 			sourceTree = "<group>";
@@ -136,9 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				222CD2491FD47A290078396F /* zmalloc.c in Sources */,
 				222CD1871FD398500078396F /* server.c in Sources */,
-				222CD18D1FD4599C0078396F /* adlist.c in Sources */,
 				222CD1841FD397AB0078396F /* cnet.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
