@@ -12,4 +12,4 @@
 #include <stdio.h>
 
 #endif /* cnet_h */
-
+int anetTcpServer(int port, int backlog);

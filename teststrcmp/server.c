@@ -15,7 +15,4 @@ int main (int argc, char *argv[]) {
     if (server.listenfd < 0) {
         return -1;
     }
-    
-    
-    
 }

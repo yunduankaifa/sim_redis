@@ -10,8 +10,8 @@
 #define server_h
 
 #include <stdio.h>
-#include "adlist.c"
-#include "cnet.c"
+//#include "adlist.c"
+#include "cnet.h"
 
 #endif /* server_h */
 
@@ -20,7 +20,7 @@
 
 struct redisServer {
     int listenfd;
-    struct list *client;
+//    struct list *client;
     int port;
     int tcp_backlog;
 
