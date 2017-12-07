@@ -38,6 +38,5 @@ struct redisServer {
 
 };
 
-struct redisServer server;
 
 #endif /* server_h */
