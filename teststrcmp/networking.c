@@ -16,9 +16,6 @@
 #include "cnet.h"
 #include "server.h"
 
-
-
-
 #define MAX_ACCEPTS_PER_CALL 1000
 
 void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask) {
@@ -34,8 +31,9 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask) {
          */
             return;
         }
+        printf("conn succed!\n");
        //  serverLog(LL_VERBOSE,"Accepted %s:%d", cip, cport);
-        acceptCommonHandler(cfd,0,cip);
+  //      acceptCommonHandler(cfd,0,cip);
     }
 
 }
