@@ -12,6 +12,7 @@
 #include <errno.h>
 #include "ae.h"
 #include "cnet.h"
+#include "server.h"
 
 
 #define MAX_ACCEPTS_PER_CALL 1000
