@@ -13,6 +13,7 @@
 #include <sys/socket.h>
 #include <errno.h>
 #include "ae.h"
+#include "server.h"
 #include "cnet.h"
 
 
