@@ -14,15 +14,14 @@
 #include "cnet.h"
 #include "ae.h"
 
-
-
-
 #define DEFAULT_PORT  8811
 #define TCP_BACKLOG   500
 #define CONFIG_BINDADDR_MAX 16
 #define CONFIG_MIN_RESERVED_FDS 32
 #define CONFIG_FDSET_INCR (CONFIG_MIN_RESERVED_FDS+96)
 #define NET_IP_STR_LEN 46
+
+void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask);
 
 
 struct redisServer {

@@ -6,14 +6,11 @@
 //  Copyright © 2017年 cai. All rights reserved.
 //
 
-#ifndef networking_c
-#define networking_c
 
 #include <stdio.h>
 #include <sys/socket.h>
 #include <errno.h>
 #include "ae.h"
-#include "server.h"
 #include "cnet.h"
 
 
@@ -39,4 +36,3 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask) {
 
 }
 
-#endif
