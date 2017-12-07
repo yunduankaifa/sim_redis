@@ -10,6 +10,11 @@
 #include <stdlib.h>
 #include <errno.h>
 
+
+#ifdef HAVE_EPOLL
+#include "aepoll.c"
+#endif
+
 aeEventLoop *aeCreateEventLoop(int setsize) {
     aeEventLoop *el;
     el = malloc(sizeof(aeEventLoop));

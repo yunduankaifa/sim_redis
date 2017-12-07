@@ -7,8 +7,7 @@
 //
 
 
-#include <sys/epoll>
-#include "ae.h"
+#include <sys/epoll.h>
 
 typedef struct aeApiState {
     int epfd;

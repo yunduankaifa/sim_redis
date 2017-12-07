@@ -23,10 +23,6 @@
 #define HAVE_KQUEUE 1
 #endif
 
-#ifdef HAVE_EPOLL
-#include "aepoll.c"
-#endif
-
 
 #define AE_OK 0
 #define AE_ERR -1
