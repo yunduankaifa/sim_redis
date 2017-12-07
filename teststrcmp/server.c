@@ -7,7 +7,7 @@
 //
 
 #include "server.h"
-
+#include "networking.c"
 
 
 int main (int argc, char *argv[]) {
