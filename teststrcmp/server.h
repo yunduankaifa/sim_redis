@@ -10,7 +10,7 @@
 #define server_h
 
 #include <stdio.h>
-#include "adlist.c"
+#include "adlist.h"
 #include "cnet.h"
 #include "ae.h"
 
