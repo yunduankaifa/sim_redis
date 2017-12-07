@@ -10,6 +10,7 @@
 #define cnet_h
 
 #include <stdio.h>
+#include <sys/socket.h>
 
 
 #define ANET_OK 0
@@ -29,8 +30,11 @@
 #endif
 
 
-#endif /* cnet_h */
+
 int anetTcpServer(int port, int backlog);
 int anetTcpAccept(char *err, int s, char *ip, size_t ip_len, int *port);
 static int anetGenericAccept(char *err, int s, struct sockaddr *sa, socklen_t *len);
 static void anetSetError(char *err, const char *fmt, ...);
+
+
+#endif /* cnet_h */

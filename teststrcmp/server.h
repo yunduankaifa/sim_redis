@@ -15,7 +15,7 @@
 #include "ae.h"
 #include "networking.c"
 
-#endif /* server_h */
+
 
 #define DEFAULT_PORT  8811
 #define TCP_BACKLOG   500
@@ -40,3 +40,4 @@ struct redisServer {
 
 struct redisServer server;
 
+#endif /* server_h */

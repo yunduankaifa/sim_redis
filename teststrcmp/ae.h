@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 
-#endif /* ae_h */
+
 
 #ifdef __linux__
 #define HAVE_EPOLL 1
@@ -125,7 +125,7 @@ int aeDeleteFileEvent(aeEventLoop *eventLoop, aeFileEvent *event);
 int aeProcessEvents(aeEventLoop *eventLoop, int flags);
 void aeMain(aeEventLoop *eventLoop);
 
-
+#endif /* ae_h */
 
 
 
