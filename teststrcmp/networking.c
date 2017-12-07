@@ -6,6 +6,9 @@
 //  Copyright © 2017年 cai. All rights reserved.
 //
 
+#ifndef __REDIS_H
+#define __REDIS_H
+
 #include <stdio.h>
 #include <sys/socket.h>
 #include <errno.h>
@@ -36,3 +39,5 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask) {
     }
 
 }
+
+#endif
