@@ -6,8 +6,8 @@
 //  Copyright © 2017年 cai. All rights reserved.
 //
 
-#ifndef __REDIS_H
-#define __REDIS_H
+#ifndef networking_c
+#define networking_c
 
 #include <stdio.h>
 #include <sys/socket.h>
