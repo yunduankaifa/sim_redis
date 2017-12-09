@@ -81,6 +81,7 @@ int aeProcessEvents(aeEventLoop *eventLoop, int flags)
         
         /* Call the multiplexing API, will return only on timeout or when
          * some event fires. */
+        tvp = malloc(sizeof(struct timeval));
         tvp->tv_sec = 10;
         tvp->tv_usec = 0;
         numevents = aeApiPoll(eventLoop, tvp);
