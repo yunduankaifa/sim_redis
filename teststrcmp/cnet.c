@@ -44,13 +44,18 @@ int anetTcpServer(int port, int backlog) {
         return -1;
     }
     
+    memset(&sa,0,sizeof(sa));
+    
     sa.sin_family = AF_INET;
     sa.sin_port = htons(port);
     sa.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
     
-    if (bind(s, (struct sockaddr*)&sa, sizeof(sa)) < 0) {
+    if (bind(s, (struct sockaddr*)&sa, (socklen_t)sizeof(sa)) < 0) {
         return -1;
     }
+    
+    
+    
     
     if (listen(s, backlog) < 0) {
         return -1;
