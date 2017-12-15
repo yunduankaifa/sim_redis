@@ -8,10 +8,10 @@
 
 #include <stdio.h>
 #include "server.h"
-typedef void redisCommandProc(client *c);
+typedef int redisCommandProc(client *c);
 typedef void redisGetKeysProc();
-void getCommand();
-void setCommand();
+int getCommand();
+int setCommand();
 
 typedef struct redisCommand {
     char *name;
@@ -34,12 +34,12 @@ struct redisCommand redisCommandTable[] = {
     {"set",setCommand,-3,"wm",0,NULL,1,1,1,0,0},
 };
 
-void getCommand(client *c) {
-
+int getCommand(client *c) {
+    return 0;
 }
 
-void setCommand(client *c) {
-    return dbSetKey(c->db, c->argv[1], argv[2]);
+int setCommand(client *c) {
+    return dbSetKey(c->db, c->argv[1], c->argv[2]);
 }
 
 
