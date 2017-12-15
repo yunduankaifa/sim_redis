@@ -11,22 +11,28 @@
 
 #include <stdio.h>
 
-#endif /* adlist_h */
+#define listLength(l)  ((l)->len)
 
-struct listNode {
+typedef struct listNode {
     struct listNode *next, *pre;
     void *value;
 
-};
+} listNode;
 
 
-struct list {
-    struct listNode *head, *tail;
-    int cur_len;
+typedef struct list {
+    listNode *head, *tail;
+    unsigned long len;
     
     
-};
+} list;
 
 
 struct listNode *listAdd(struct list *l, void *data);
+list *listCreate(void);
+list *listAddNodeHead(list *list, void *value);
+list *listAddNodeTail(list *list, void *value);
 
+
+
+#endif /* adlist_h */

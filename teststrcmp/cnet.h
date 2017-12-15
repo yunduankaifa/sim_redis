@@ -35,6 +35,13 @@ int anetTcpServer(int port, int backlog);
 int anetTcpAccept(char *err, int s, char *ip, size_t ip_len, int *port);
 static int anetGenericAccept(char *err, int s, struct sockaddr *sa, socklen_t *len);
 static void anetSetError(char *err, const char *fmt, ...);
+int anetNonBlock(char *err, int fd);
+int anetBlock(char *err, int fd);
+int anetEnableTcpNoDelay(char *err, int fd);
+int anetDisableTcpNoDelay(char *err, int fd);
+int anetKeepAlive(char *err, int fd, int interval);
+
+
 
 
 #endif /* cnet_h */

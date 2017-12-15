@@ -10,9 +10,12 @@
 #define server_h
 
 #include <stdio.h>
+#include <unistd.h>
 #include "adlist.h"
 #include "cnet.h"
 #include "ae.h"
+#include "sds.h"
+#include "db.c"
 
 #define DEFAULT_PORT  8811
 #define TCP_BACKLOG   500
@@ -20,11 +23,30 @@
 #define CONFIG_MIN_RESERVED_FDS 32
 #define CONFIG_FDSET_INCR (CONFIG_MIN_RESERVED_FDS+96)
 #define NET_IP_STR_LEN 46
+#define CONFIG_DEFAULT_TCP_KEEPALIVE 300
+#define PROTO_IOBUF_LEN         (1024*16)  /* Generic I/O buffer size */
 
 void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask);
 
+typedef struct client {
+    int fd;
+    redisDb *db;
+    
+    char *buffer;
+    int flags;
+    sds querybuf;           /* Buffer we use to accumulate client queries. */
+    sds pending_querybuf;   /* If this is a master, this buffer represents the
+                             yet not applied replication stream that we
+                             are receiving from the master. */
+    size_t querybuf_peak;   /* Recent (100ms or more) peak of querybuf size. */
+    sds *argv;
+    int *argc;
+    
+} client;
 
-struct redisServer {
+
+
+typedef struct redisServer {
     int listenfd;
 //    struct list *client;
     int port;
@@ -33,10 +55,16 @@ struct redisServer {
     aeEventLoop *el;
     int maxclients;
     char neterr[ANET_ERR_LEN];
+    int tcpkeepalive;
+    list *clients;
+    unsigned long stat_rejected_conn;
+    unsigned long stat_numconnections;
     
+} redisServer;
 
-};
 
 
-extern struct redisServer server;
+
+
+extern redisServer server;
 #endif /* server_h */
