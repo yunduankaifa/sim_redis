@@ -37,8 +37,8 @@
 #include <assert.h>
 #include <limits.h>
 #include "sds.h"
-//#include "sdsalloc.h"
-#define s_malloc malloc
+#include "sdsalloc.h"
+
 static inline int sdsHdrSize(char type) {
     switch(type&SDS_TYPE_MASK) {
         case SDS_TYPE_5:
