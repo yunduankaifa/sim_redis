@@ -16,6 +16,7 @@
 		222CD30F1FDC1FFC0078396F /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD30D1FDC1FFC0078396F /* sds.c */; };
 		222CD33B1FE2ADA70078396F /* rediscommand.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD33A1FE2ADA70078396F /* rediscommand.c */; };
 		222CD33D1FE2B7280078396F /* db.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD33C1FE2B7280078396F /* db.c */; };
+		224A89831FE3B760004C7F9C /* zmalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A89811FE3B760004C7F9C /* zmalloc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,8 @@
 		222CD33A1FE2ADA70078396F /* rediscommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rediscommand.c; sourceTree = "<group>"; };
 		222CD33C1FE2B7280078396F /* db.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = db.c; sourceTree = "<group>"; };
 		224A89801FE3B6F7004C7F9C /* sdsalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdsalloc.h; sourceTree = "<group>"; };
+		224A89811FE3B760004C7F9C /* zmalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zmalloc.c; sourceTree = "<group>"; };
+		224A89821FE3B760004C7F9C /* zmalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmalloc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,8 @@
 		222CD17A1FCDAD7C0078396F /* teststrcmp */ = {
 			isa = PBXGroup;
 			children = (
+				224A89811FE3B760004C7F9C /* zmalloc.c */,
+				224A89821FE3B760004C7F9C /* zmalloc.h */,
 				224A89801FE3B6F7004C7F9C /* sdsalloc.h */,
 				222CD30D1FDC1FFC0078396F /* sds.c */,
 				222CD30E1FDC1FFC0078396F /* sds.h */,
@@ -159,6 +164,7 @@
 				222CD2F11FD5058F0078396F /* adlist.c in Sources */,
 				222CD2F71FD5670D0078396F /* aepoll.c in Sources */,
 				222CD33D1FE2B7280078396F /* db.c in Sources */,
+				224A89831FE3B760004C7F9C /* zmalloc.c in Sources */,
 				222CD2F91FD6BA7F0078396F /* networking.c in Sources */,
 				222CD1841FD397AB0078396F /* cnet.c in Sources */,
 				222CD33B1FE2ADA70078396F /* rediscommand.c in Sources */,
