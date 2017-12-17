@@ -15,7 +15,7 @@
 		222CD2F91FD6BA7F0078396F /* networking.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD2F81FD6BA7F0078396F /* networking.c */; };
 		222CD30F1FDC1FFC0078396F /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD30D1FDC1FFC0078396F /* sds.c */; };
 		222CD33B1FE2ADA70078396F /* rediscommand.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD33A1FE2ADA70078396F /* rediscommand.c */; };
-		222CD33D1FE2B7280078396F /* db.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD33C1FE2B7280078396F /* db.c */; };
+		224A89941FE6E9E2004C7F9C /* redisdb.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A89921FE6E9E2004C7F9C /* redisdb.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +45,8 @@
 		222CD30D1FDC1FFC0078396F /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
 		222CD30E1FDC1FFC0078396F /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
 		222CD33A1FE2ADA70078396F /* rediscommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rediscommand.c; sourceTree = "<group>"; };
-		222CD33C1FE2B7280078396F /* db.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = db.c; sourceTree = "<group>"; };
+		224A89921FE6E9E2004C7F9C /* redisdb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = redisdb.c; sourceTree = "<group>"; };
+		224A89931FE6E9E2004C7F9C /* redisdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = redisdb.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +92,8 @@
 				222CD2F51FD5670D0078396F /* aepoll.c */,
 				222CD2F81FD6BA7F0078396F /* networking.c */,
 				222CD33A1FE2ADA70078396F /* rediscommand.c */,
-				222CD33C1FE2B7280078396F /* db.c */,
+				224A89921FE6E9E2004C7F9C /* redisdb.c */,
+				224A89931FE6E9E2004C7F9C /* redisdb.h */,
 			);
 			path = teststrcmp;
 			sourceTree = "<group>";
@@ -156,8 +158,8 @@
 				222CD1871FD398500078396F /* server.c in Sources */,
 				222CD2F11FD5058F0078396F /* adlist.c in Sources */,
 				222CD2F71FD5670D0078396F /* aepoll.c in Sources */,
-				222CD33D1FE2B7280078396F /* db.c in Sources */,
 				222CD2F91FD6BA7F0078396F /* networking.c in Sources */,
+				224A89941FE6E9E2004C7F9C /* redisdb.c in Sources */,
 				222CD1841FD397AB0078396F /* cnet.c in Sources */,
 				222CD33B1FE2ADA70078396F /* rediscommand.c in Sources */,
 				222CD30F1FDC1FFC0078396F /* sds.c in Sources */,

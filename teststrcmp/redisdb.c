@@ -1,42 +1,12 @@
 //
-//  db.c
+//  redisdb.c
 //  teststrcmp
 //
-//  Created by cai on 2017/12/14.
+//  Created by cai on 2017/12/18.
 //  Copyright © 2017年 cai. All rights reserved.
 //
 
-#include <stdio.h>
-#include "sds.c"
-
-#define DICT_INIT_SIZE  100
-
-typedef unsigned int computeHashKey(sds key);
-
-typedef struct dictEnty {
-    sds key;
-    sds v;
-    struct dictEnty *next;
-} dictEnty;
-
-typedef struct dictht{
-    computeHashKey* comfunc;
-    dictEnty **table;
-    int size;
-    int used;
-} dictht;
-
-
-typedef struct dict {
-    dictht ht;
-
-} dict;
-
-// db
-typedef struct redisDb {
-    int id;
-    dict *dict;
-} redisDb;
+#include "redisdb.h"
 
 int initDb(redisDb* db) {
     db = malloc(sizeof(redisDb));
@@ -58,7 +28,7 @@ int isKeyExist(dictEnty *el, sds key) {
         if (strcmp(el->key, key) == 0) return 1;
         else el = el->next;
     }
-
+    
     return 0;
 }
 
@@ -78,6 +48,3 @@ int dbSetKey(redisDb *db, sds key, sds value) {
         return 1;
     }
 }
-
-
-

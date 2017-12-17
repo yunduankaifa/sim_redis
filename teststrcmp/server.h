@@ -15,7 +15,7 @@
 #include "cnet.h"
 #include "ae.h"
 #include "sds.h"
-#include "db.c"
+#include "redisdb.h"
 
 #define DEFAULT_PORT  8811
 #define TCP_BACKLOG   500
