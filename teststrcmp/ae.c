@@ -24,6 +24,7 @@ aeEventLoop *aeCreateEventLoop(int setsize) {
     el->setsize = setsize;
     
     el->events = malloc(sizeof(aeFileEvent)*setsize);
+    el->fired = malloc(sizeof(aeFileEvent)*setsize);
     if(el->events == NULL) goto err;
     
     el->stop = 0;
