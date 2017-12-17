@@ -15,7 +15,7 @@
 #include "cnet.h"
 #include "server.h"
 //#include "sds.h"
-#include "rediscommand.c"
+#include "rediscommand.h"
 
 
 #define UNUSED(x) (void)(x)
