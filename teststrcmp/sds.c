@@ -1099,14 +1099,13 @@ sds sdsjoinsds(sds *argv, int argc, const char *sep, size_t seplen) {
 void *sds_malloc(size_t size) { return malloc(size); }
 void *sds_realloc(void *ptr, size_t size) {
     void *new = malloc(sizeof(ptr)+size);
-    int  i=0;
-    for(; i< sizeof(ptr); i++)
-        free(ptr);
+  //  int  i=0;
+    free(ptr);
     return new;
 }
 void sds_free(void *ptr) {
-    int  i=0;
-    for(; i< sizeof(ptr); i++)
+  //  int  i=0;
+ //   for(; i< sizeof(ptr); i++)
         free(ptr);
 }
 
