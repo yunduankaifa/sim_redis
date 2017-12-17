@@ -14,8 +14,8 @@
 		222CD2F71FD5670D0078396F /* aepoll.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD2F51FD5670D0078396F /* aepoll.c */; };
 		222CD2F91FD6BA7F0078396F /* networking.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD2F81FD6BA7F0078396F /* networking.c */; };
 		222CD30F1FDC1FFC0078396F /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD30D1FDC1FFC0078396F /* sds.c */; };
-		222CD33B1FE2ADA70078396F /* rediscommand.c in Sources */ = {isa = PBXBuildFile; fileRef = 222CD33A1FE2ADA70078396F /* rediscommand.c */; };
 		224A89941FE6E9E2004C7F9C /* redisdb.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A89921FE6E9E2004C7F9C /* redisdb.c */; };
+		224A89971FE6F2C7004C7F9C /* rediscommand.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A89951FE6F2C7004C7F9C /* rediscommand.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,9 +44,10 @@
 		222CD2F81FD6BA7F0078396F /* networking.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = networking.c; sourceTree = "<group>"; };
 		222CD30D1FDC1FFC0078396F /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
 		222CD30E1FDC1FFC0078396F /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
-		222CD33A1FE2ADA70078396F /* rediscommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rediscommand.c; sourceTree = "<group>"; };
 		224A89921FE6E9E2004C7F9C /* redisdb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = redisdb.c; sourceTree = "<group>"; };
 		224A89931FE6E9E2004C7F9C /* redisdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = redisdb.h; sourceTree = "<group>"; };
+		224A89951FE6F2C7004C7F9C /* rediscommand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rediscommand.c; sourceTree = "<group>"; };
+		224A89961FE6F2C7004C7F9C /* rediscommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rediscommand.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,9 +92,10 @@
 				222CD2F31FD561EF0078396F /* ae.h */,
 				222CD2F51FD5670D0078396F /* aepoll.c */,
 				222CD2F81FD6BA7F0078396F /* networking.c */,
-				222CD33A1FE2ADA70078396F /* rediscommand.c */,
 				224A89921FE6E9E2004C7F9C /* redisdb.c */,
 				224A89931FE6E9E2004C7F9C /* redisdb.h */,
+				224A89951FE6F2C7004C7F9C /* rediscommand.c */,
+				224A89961FE6F2C7004C7F9C /* rediscommand.h */,
 			);
 			path = teststrcmp;
 			sourceTree = "<group>";
@@ -160,8 +162,8 @@
 				222CD2F71FD5670D0078396F /* aepoll.c in Sources */,
 				222CD2F91FD6BA7F0078396F /* networking.c in Sources */,
 				224A89941FE6E9E2004C7F9C /* redisdb.c in Sources */,
+				224A89971FE6F2C7004C7F9C /* rediscommand.c in Sources */,
 				222CD1841FD397AB0078396F /* cnet.c in Sources */,
-				222CD33B1FE2ADA70078396F /* rediscommand.c in Sources */,
 				222CD30F1FDC1FFC0078396F /* sds.c in Sources */,
 				222CD2F41FD561EF0078396F /* ae.c in Sources */,
 			);
