@@ -14,7 +14,7 @@
 #include "ae.h"
 #include "cnet.h"
 #include "server.h"
-#include "sds.h"
+//#include "sds.h"
 #include "rediscommand.c"
 
 
@@ -27,6 +27,9 @@ client *createClient(int fd) {
     c = malloc(sizeof(client));
     c->flags = 0;
     c->db    = malloc(sizeof(redisDb));
+    c->querybuf = sdsempty();
+    // 查询缓冲区峰值
+    c->querybuf_peak = 0;
     if (fd != -1) {
         anetNonBlock(NULL,fd);
         anetEnableTcpNoDelay(NULL,fd);
