@@ -7,9 +7,11 @@
 //
 
 #include "redisdb.h"
+#include <stdlib.h>
+#include <string.h>
 
 int initDb(redisDb* db) {
-    db = malloc(sizeof(redisDb));
+    db = (redisDb*)malloc(sizeof(redisDb));
     db->dict = malloc(sizeof(dict));
     db->dict->ht.size = DICT_INIT_SIZE;
     db->dict->ht.table = malloc(sizeof(dictEnty*));
