@@ -66,7 +66,7 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask) {
     int cport, cfd=-1, max = MAX_ACCEPTS_PER_CALL;
     char cip[NET_IP_STR_LEN];
     
-    while(max--) {
+  //  while(max--) {
         cfd = anetTcpAccept(server.neterr, fd, cip, sizeof(cip), &cport);
         if (cfd == ANET_ERR) {
             if (errno != EWOULDBLOCK)
@@ -79,7 +79,7 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask) {
        //  serverLog(LL_VERBOSE,"Accepted %s:%d", cip, cport);
   
         acceptCommonHandler(cfd,0,cip);
-    }
+ //   }
 
 }
 
