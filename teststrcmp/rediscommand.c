@@ -10,6 +10,10 @@
 
 #include <stdio.h>
 
+struct redisCommand redisCommandTable[] = {
+    {"get",getCommand,2,"rF",0,NULL,1,1,1,0,0},
+    {"set",setCommand,-3,"wm",0,NULL,1,1,1,0,0},
+};
 
 int getCommand(client *c) {
     return 0;
