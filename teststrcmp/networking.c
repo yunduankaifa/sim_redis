@@ -121,6 +121,7 @@ void getArgFromBuffer(sds buffer, sds *argv, int *argc) {
     argv = sdssplitargs(buffer, argc);
 }
 
+
 void processInputBuffer(client *c) {
     if (c == NULL) return;
     c->argv = sdssplitargs(c->querybuf, &(c->argc));

@@ -37,6 +37,7 @@
 #include <assert.h>
 #include <limits.h>
 #include "sds.h"
+#include "sdsalloc.h"
 
 
 static inline int sdsHdrSize(char type) {
@@ -1096,18 +1097,9 @@ sds sdsjoinsds(sds *argv, int argc, const char *sep, size_t seplen) {
  * the overhead of function calls. Here we define these wrappers only for
  * the programs SDS is linked to, if they want to touch the SDS internals
  * even if they use a different allocator. */
-void *sds_malloc(size_t size) { return malloc(size); }
-void *sds_realloc(void *ptr, size_t size) {
-    void *new = malloc(sizeof(ptr)+size);
-  //  int  i=0;
-    free(ptr);
-    return new;
-}
-void sds_free(void *ptr) {
-  //  int  i=0;
- //   for(; i< sizeof(ptr); i++)
-        free(ptr);
-}
+void *sds_malloc(size_t size) { return s_malloc(size); }
+void *sds_realloc(void *ptr, size_t size) { return s_realloc(ptr,size); }
+void sds_free(void *ptr) { s_free(ptr); }
 
 #if defined(SDS_TEST_MAIN)
 #include <stdio.h>
