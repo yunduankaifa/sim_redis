@@ -159,7 +159,6 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     qblen = sdslen(c->querybuf);
     if (c->querybuf_peak < qblen) c->querybuf_peak = qblen;
     c->querybuf = sdsMakeRoomFor(c->querybuf, readlen);
-    
     nread = read(fd, c->querybuf+qblen, readlen);
     printf("%s\n", c->querybuf+qblen );
     if (nread == -1) {
