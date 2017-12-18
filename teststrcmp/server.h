@@ -26,6 +26,8 @@
 #define CONFIG_DEFAULT_TCP_KEEPALIVE 300
 #define PROTO_IOBUF_LEN         (1024*16)  /* Generic I/O buffer size */
 
+typedef long long mstime_t;
+
 void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask);
 
 typedef struct client {
