@@ -20,7 +20,7 @@ int getCommand(client *c) {
 }
 
 int setCommand(client *c) {
-    return dbSetKey(c->db, c->argv[1], c->argv[2]);
+    return dbSetKey(server.db, c->argv[1], c->argv[2]);
 }
 
 
