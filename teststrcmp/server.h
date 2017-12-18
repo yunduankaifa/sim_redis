@@ -40,7 +40,7 @@ typedef struct client {
                              are receiving from the master. */
     size_t querybuf_peak;   /* Recent (100ms or more) peak of querybuf size. */
     sds *argv;
-    int *argc;
+    int argc;
     
 } client;
 

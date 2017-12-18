@@ -30,6 +30,8 @@ client *createClient(int fd) {
     c->querybuf = sdsempty();
     // 查询缓冲区峰值
     c->querybuf_peak = 0;
+    c->argc = 0;
+    c->argv = NULL;
     if (fd != -1) {
         anetNonBlock(NULL,fd);
         anetEnableTcpNoDelay(NULL,fd);
@@ -121,9 +123,7 @@ void getArgFromBuffer(sds buffer, sds *argv, int *argc) {
 
 void processInputBuffer(client *c) {
     if (c == NULL) return;
-    c->argv = NULL;
-    c->argc = NULL;
-    c->argv = sdssplitargs(c->querybuf, c->argc);
+    c->argv = sdssplitargs(c->querybuf, &(c->argc));
     redisCommand *ci = createCommand(c);
     if (ci->proc(c)==0) {
         printf("command exe success!\n");
@@ -137,7 +137,6 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     client *c = (client*) privdata;
     int nread, readlen;
     size_t qblen;
-    char buffer[256];
     UNUSED(el);
     UNUSED(mask);
     
@@ -160,9 +159,8 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     if (c->querybuf_peak < qblen) c->querybuf_peak = qblen;
     c->querybuf = sdsMakeRoomFor(c->querybuf, readlen);
     
-  //  nread = read(fd, c->querybuf+qblen, readlen);
-    nread = read(fd, buffer, 255);
-    printf("%s", buffer);
+    nread = read(fd, c->querybuf+qblen, readlen);
+    printf("%s\n", c->querybuf+qblen );
     if (nread == -1) {
         if (errno == EAGAIN) {
             return;
