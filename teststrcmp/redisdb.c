@@ -50,3 +50,14 @@ int dbSetKey(redisDb *db, sds key, sds value) {
         return 1;
     }
 }
+
+sds dbGetKey(redisDb *db, sds key) {
+    int index = getHashIndex(key);
+    dictEnty *el  = db->dict->ht.table[index];
+    while (el != NULL) {
+        if (strcmp(el->key, key) == 0) return el->v;
+        else el = el->next;
+    }
+    
+    return NULL;
+}

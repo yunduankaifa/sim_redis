@@ -15,12 +15,28 @@ struct redisCommand redisCommandTable[] = {
     {"set",setCommand,-3,"wm",0,NULL,1,1,1,0,0},
 };
 
-int getCommand(client *c) {
-    return 0;
+//从内存取value，并给客户端写执行结果
+void getCommand(client *c) {
+    sds msg;
+    msg = dbGetKey(server.db, c->argv[1]);
+    if (msg == NULL) {
+        msg = malloc(sizeof(char)*256);
+        msg = "(nil)\0";
+    }
+    send(c->fd, msg, 256, 0);
 }
 
-int setCommand(client *c) {
-    return dbSetKey(server.db, c->argv[1], c->argv[2]);
+//存入内存，并且给客户端写执行结果
+
+void setCommand(client *c) {
+    sds msg = malloc(sizeof(char)*256);
+    if (!dbSetKey(server.db, c->argv[1], c->argv[2])) {
+        msg = "ok!\0";
+    } else {
+        msg = "key already exist!\0";
+    }
+    
+    send(c->fd, msg, 256, 0);
 }
 
 
