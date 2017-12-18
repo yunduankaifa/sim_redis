@@ -12,15 +12,13 @@
 
 #define HT_TABLE_SIZE  256    //简化版，按key的首个字符的ascii码进行hash
 
-int initDb(redisDb* db) {
+redisDb* createDb() {
+    redisDb *db;
     db = (redisDb*)malloc(sizeof(redisDb));
     db->dict = malloc(sizeof(dict));
     db->dict->ht.size = DICT_INIT_SIZE;
     db->dict->ht.table = malloc(sizeof(dictEnty*)*HT_TABLE_SIZE);
-    if (db->dict->ht.table==NULL) {
-        return 1;
-    }
-    else  return 0;
+    return db;
 }
 
 unsigned long getHashIndex(sds key) {

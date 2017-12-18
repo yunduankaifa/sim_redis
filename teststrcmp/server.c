@@ -20,6 +20,7 @@ int main (int argc, char *argv[]) {
     server.tcpkeepalive = CONFIG_DEFAULT_TCP_KEEPALIVE;
     server.el = aeCreateEventLoop(server.maxclients+CONFIG_FDSET_INCR);
     server.clients = listCreate();
+    server.db = createDb();
 
     server.listenfd = anetTcpServer(server.port, server.tcp_backlog);
     if (server.listenfd < 0) {

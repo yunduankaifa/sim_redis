@@ -32,7 +32,6 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask);
 
 typedef struct client {
     int fd;
-    redisDb *db;
     
     char *buffer;
     int flags;
@@ -50,6 +49,7 @@ typedef struct client {
 
 typedef struct redisServer {
     int listenfd;
+    redisDb *db;
 //    struct list *client;
     int port;
     int tcp_backlog;

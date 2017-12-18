@@ -41,7 +41,7 @@ typedef struct redisDb {
     dict *dict;
 } redisDb;
 
-int initDb(redisDb* db) ;
+redisDb* createDb();
 
 unsigned long getHashIndex(sds key);
 

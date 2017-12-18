@@ -26,7 +26,6 @@ client *createClient(int fd) {
     client *c = NULL;
     c = malloc(sizeof(client));
     c->flags = 0;
-    c->db    = malloc(sizeof(redisDb));
     c->querybuf = sdsempty();
     // 查询缓冲区峰值
     c->querybuf_peak = 0;
