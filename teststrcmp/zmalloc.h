@@ -71,6 +71,7 @@
 #if defined(USE_JEMALLOC) && defined(JEMALLOC_FRAG_HINT)
 #define HAVE_DEFRAG
 #endif
+#define  HAVE_MALLOC_SIZE 1
 
 void *zmalloc(size_t size);
 void *zcalloc(size_t size);
