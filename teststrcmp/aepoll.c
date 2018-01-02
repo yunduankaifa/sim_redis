@@ -53,6 +53,18 @@ static int aeApiAddEvent(aeEventLoop *eventLoop, int fd, int mask) {
 }
 
 
+static int aeApiRemoveEvent(aeEventLoop *eventLoop, int fd, int mask) {
+    int op = EPOLL_CTL_DEL;
+    struct epoll_event ee = {0};
+    ee.events = 0;
+    ee.data.fd = fd;      
+    if (mask & AE_READABLE) ee.events |= EPOLLIN;
+    if (mask & AE_WRITABLE) ee.events |= EPOLLOUT;
+    if (epoll_ctl(eventLoop->apidata->epfd, op, fd, &ee) == -1) return -1;
+    return 0;
+}
+
+
 static int aeApiPoll(aeEventLoop *eventLoop, struct timeval *tvp) {
     aeApiState *state = eventLoop->apidata;
     int retval, numevents = 0;

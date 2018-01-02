@@ -121,7 +121,7 @@ typedef struct aeEventLoop {
 
 aeEventLoop *aeCreateEventLoop(int setSize);
 int aeCreateFileEvent(aeEventLoop *eventLoop, int fd, int mask, aeFileProc *proc, void *clientData);
-int aeDeleteFileEvent(aeEventLoop *eventLoop, aeFileEvent *event);
+void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask);
 int aeProcessEvents(aeEventLoop *eventLoop, int flags);
 void aeMain(aeEventLoop *eventLoop);
 

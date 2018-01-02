@@ -56,6 +56,13 @@ void freeClient(client *c) {
     free(c->buffer);
     sdsfree(c->pending_querybuf);
     sdsfree(c->querybuf);
+    //server clients 去掉 listremove
+    //eventloop 里对应的fd对应的事件去掉 =NULL
+    //epoll 监听的事件去掉 epoll_ctl
+  //  aeApiRemoveEvent(server.eventLoop, c->fd, server.eventLoop->apidata->events[fd].mask);
+    
+    aeDeleteFileEvent(server.el, c->fd, server.el->events[c->fd].mask);
+    listDeleteNode(server.clients, c);
 }
 
 
@@ -131,7 +138,7 @@ void processInputBuffer(client *c) {
 
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     client *c = (client*) privdata;
-    int nread, readlen;
+    int nread=0, readlen;
     size_t qblen;
     UNUSED(el);
     UNUSED(mask);
@@ -143,7 +150,6 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     c->querybuf = sdsMakeRoomFor(c->querybuf, readlen);
     nread = read(fd, c->querybuf+qblen, readlen);
     printf("%s\n", c->querybuf+qblen );
-    printf("%d\n", nread);
     if (nread == -1) {
         if (errno == EAGAIN) {
             return;

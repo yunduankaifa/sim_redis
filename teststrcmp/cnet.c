@@ -162,8 +162,6 @@ int anetTcpServer(int port, int backlog) {
     }
     
     
-    
-    
     if (listen(s, backlog) < 0) {
         return -1;
     }

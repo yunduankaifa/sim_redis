@@ -32,6 +32,7 @@ struct listNode *listAdd(struct list *l, void *data);
 list *listCreate(void);
 list *listAddNodeHead(list *list, void *value);
 list *listAddNodeTail(list *list, void *value);
+void listDeleteNode(list *list, void *value);
 
 
 
