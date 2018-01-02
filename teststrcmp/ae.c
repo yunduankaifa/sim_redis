@@ -9,7 +9,7 @@
 #include "ae.h"
 #include <stdlib.h>
 #include <errno.h>
-
+#include <sys/time.h>
 
 #ifdef HAVE_EPOLL
 #include "aepoll.c"
@@ -27,6 +27,7 @@ aeEventLoop *aeCreateEventLoop(int setsize) {
     el->fired = malloc(sizeof(aeFileEvent)*setsize);
     if(el->events == NULL) goto err;
     
+    el->timeEvents = NULL;
     el->stop = 0;
     el->beforesleep = NULL;
     if (aeApiCreate(el) == -1) goto err;
@@ -81,11 +82,91 @@ void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask) {
 
 }
 
+
+int aeCreateTimeEvent(aeEventLoop *eventLoop, long long milliseconds) {
+    aeTimeEvent *te = malloc(sizeof(aeTimeEvent));
+    if (te == NULL) return AE_ERR;
+    aeAddMillisecondsToNow(milliseconds,&te->when_sec,&te->when_ms);
+
+
+    te->timeInterval = milliseconds;
+    te->next = eventLoop->timeEvents;
+    eventLoop->timeEvents = te;
+    return AE_OK;
+}
+
+
+aeTimeEvent *aeGetNearestTimeEvent(aeEventLoop *eventLoop) {
+    aeTimeEvent *te = eventLoop->timeEvents, *nearest=NULL;
+    while (te != NULL) {
+        if (nearest==NULL || te->when_sec<nearest->when_sec || (te->when_sec==nearest->when_sec && te->when_ms<nearest->when_ms))
+            nearest = te;
+        te=te->next;
+    }
+    
+    return nearest;
+}
+
+
+
+void aeDeleteTimeEvent(aeEventLoop *eventLoop, aeTimeEvent *timeEvent) {
+    
+    
+}
+
+/*
+ * 在当前时间上加上 milliseconds 毫秒，
+ * 并且将加上之后的秒数和毫秒数分别保存在 sec 和 ms 指针中。
+ */
+static void aeAddMillisecondsToNow(long long milliseconds, long *sec, long *ms) {
+    long cur_sec, cur_ms, when_sec, when_ms;
+    
+    // 获取当前时间
+    aeGetTime(&cur_sec, &cur_ms);
+    
+    // 计算增加 milliseconds 之后的秒数和毫秒数
+    when_sec = cur_sec + milliseconds/1000;
+    when_ms = cur_ms + milliseconds%1000;
+    
+    // 进位：
+    // 如果 when_ms 大于等于 1000
+    // 那么将 when_sec 增大一秒
+    if (when_ms >= 1000) {
+        when_sec ++;
+        when_ms -= 1000;
+    }
+    
+    // 保存到指针中
+    *sec = when_sec;
+    *ms = when_ms;
+}
+
+/*
+ * 取出当前时间的秒和毫秒，
+ * 并分别将它们保存到 seconds 和 milliseconds 参数中
+ */
+static void aeGetTime(long *seconds, long *milliseconds)
+{
+    struct timeval tv;
+    
+    gettimeofday(&tv, NULL);
+    *seconds = tv.tv_sec;
+    *milliseconds = tv.tv_usec/1000;
+}
+
+
+
+
+
+
 int aeProcessEvents(aeEventLoop *eventLoop, int flags)
 {
     int processed = 0, numevents;
     struct timeval *tvp = NULL;
-    /* Nothing to do? return ASAP */
+    aeTimeEvent *shortest=NULL;
+    long now_sec, now_ms;
+
+
     if (!(flags & AE_TIME_EVENTS) && !(flags & AE_FILE_EVENTS)) return 0;
     
     /* Note that we want call select() even if there are no
@@ -98,9 +179,30 @@ int aeProcessEvents(aeEventLoop *eventLoop, int flags)
         
         /* Call the multiplexing API, will return only on timeout or when
          * some event fires. */
+        shortest = aeGetNearestTimeEvent(eventLoop);
+        aeGetTime(&now_sec, &now_ms);
         tvp = malloc(sizeof(struct timeval));
-        tvp->tv_sec = 10;
-        tvp->tv_usec = 0;
+        
+        if (shortest) {
+            tvp->tv_sec = shortest->when_sec - now_sec;
+            if (shortest->when_ms < now_ms) {
+                tvp->tv_usec = ((shortest->when_ms+1000) - now_ms)*1000;
+                tvp->tv_sec --;
+            } else {
+                tvp->tv_usec = (shortest->when_ms - now_ms)*1000;
+            }
+            
+            // 时间差小于 0 ，说明事件已经可以执行了，将秒和毫秒设为 0 （不阻塞）
+            if (tvp->tv_sec < 0) tvp->tv_sec = 0;
+            if (tvp->tv_usec < 0) tvp->tv_usec = 0;
+            printf("lastTime:%ld\n", tvp->tv_sec);
+        }
+        else {
+            tvp->tv_sec = 0;
+            tvp->tv_usec = 0;
+        
+        }
+
         numevents = aeApiPoll(eventLoop, tvp);
         
         /* After sleep callback. */

@@ -88,6 +88,14 @@ typedef struct aeFiredEvent {
     
 } aeFiredEvent;
 
+typedef struct aeTimeEvent {
+    long  when_sec;
+    long  when_ms;
+    long long timeInterval;
+    struct aeTimeEvent *next;
+} aeTimeEvent;
+
+
 typedef struct aeEventLoop {
     // 目前已注册的最大描述符
     int maxfd;   /* highest file descriptor currently registered */
@@ -103,6 +111,8 @@ typedef struct aeEventLoop {
     
     // 已就绪的文件事件
     aeFiredEvent *fired; /* Fired events */
+    
+    aeTimeEvent *timeEvents;
     
     
     // 事件处理器的开关
@@ -124,6 +134,12 @@ int aeCreateFileEvent(aeEventLoop *eventLoop, int fd, int mask, aeFileProc *proc
 void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask);
 int aeProcessEvents(aeEventLoop *eventLoop, int flags);
 void aeMain(aeEventLoop *eventLoop);
+int aeCreateTimeEvent(aeEventLoop *eventLoop, long long milliseconds);
+aeTimeEvent *aeGetNearestTimeEvent(aeEventLoop *eventLoop);
+void aeDeleteTimeEvent(aeEventLoop *eventLoop, aeTimeEvent *timeEvent);
+static void aeGetTime(long *seconds, long *milliseconds);
+static void aeAddMillisecondsToNow(long long milliseconds, long *sec, long *ms);
+
 
 #endif /* ae_h */
 

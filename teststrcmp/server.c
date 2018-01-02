@@ -26,6 +26,7 @@ int main (int argc, char *argv[]) {
     if (server.listenfd < 0) {
         return -1;
     }
+    if (aeCreateTimeEvent(server.el, 100000000) == AE_ERR) return -1;
     
     if (aeCreateFileEvent(server.el, server.listenfd, AE_READABLE, acceptTcpHandler, NULL) == AE_ERR) {
         return -1;
