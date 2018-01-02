@@ -143,6 +143,7 @@ static void anetSetError(char *err, const char *fmt, ...)
 int anetTcpServer(int port, int backlog) {
     struct sockaddr_in sa;
     int s=-1;
+    int on=1;
     s = socket(AF_INET, SOCK_STREAM, 0);
     if (s < 0) {
         return -1;
@@ -153,6 +154,8 @@ int anetTcpServer(int port, int backlog) {
     sa.sin_family = AF_INET;
     sa.sin_port = htons(port);
     sa.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
     
     if (bind(s, (struct sockaddr*)&sa, (socklen_t)sizeof(sa)) < 0) {
         return -1;
