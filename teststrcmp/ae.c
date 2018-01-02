@@ -55,6 +55,7 @@ int aeCreateFileEvent(aeEventLoop *eventLoop, int fd, int mask, aeFileProc *proc
     if (aeApiAddEvent(eventLoop, fd, mask) == -1)
         return AE_ERR;
     fe->mask |= mask;   //为啥要或上之前的呢？ 要是复用了之前的fd，那岂不是会错？ 还是说肯定不会复用以前的？
+                        //答：之前可能就存在监听事件，读或者写。 mask标识每个套接字的所有监听事件
 
     if (fe->mask & AE_READABLE) fe->rfileProc = proc;
     if (fe->mask & AE_WRITABLE) fe->wfileProc = proc;

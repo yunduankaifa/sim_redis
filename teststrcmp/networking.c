@@ -125,7 +125,8 @@ void processInputBuffer(client *c) {
     if (c == NULL) return;
     c->argv = sdssplitargs(c->querybuf, &(c->argc));
     redisCommand *ci = createCommand(c);
-    ci->proc(c);
+    
+    if (ci) ci->proc(c);
 }
 
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
