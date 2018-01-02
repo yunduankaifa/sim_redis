@@ -53,7 +53,6 @@ client *createClient(int fd) {
 
 void freeClient(client *c) {
     close(c->fd);
-    free(c->buffer);
     sdsfree(c->pending_querybuf);
     sdsfree(c->querybuf);
     //server clients 去掉 listremove

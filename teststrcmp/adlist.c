@@ -77,5 +77,6 @@ void listDeleteNode(list *list, void *value) {
     }
     
     free(cur);
+    list->len--;
 }
 
