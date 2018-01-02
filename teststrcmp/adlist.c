@@ -64,13 +64,13 @@ void listDeleteNode(list *list, void *value) {
     listNode *cur = list->head;
     if (cur->value == value) {
         list->head = cur->next;
-        list->head->pre = NULL;
+        if (list->head) list->head->pre = NULL;
     }
     else {
         while(cur != NULL) {
             if (cur->value == value) {
                 cur->pre->next = cur->next;
-                cur->next->pre = cur->pre;
+                if (cur->next) cur->next->pre = cur->pre;
             }
         }
     }
