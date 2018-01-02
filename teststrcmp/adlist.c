@@ -72,6 +72,7 @@ void listDeleteNode(list *list, void *value) {
                 cur->pre->next = cur->next;
                 if (cur->next) cur->next->pre = cur->pre;
             }
+            cur = cur->next;
         }
     }
     
