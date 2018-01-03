@@ -27,6 +27,8 @@ client *createClient(int fd) {
     c = malloc(sizeof(client));
     c->flags = 0;
     c->querybuf = sdsempty();
+    c->querybuf = sdsMakeRoomFor(c->querybuf, PROTO_IOBUF_LEN);
+    
     // 查询缓冲区峰值
     c->querybuf_peak = 0;
     c->argc = 0;
@@ -138,17 +140,16 @@ void processInputBuffer(client *c) {
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     client *c = (client*) privdata;
     int nread=0, readlen;
-    size_t qblen;
     UNUSED(el);
     UNUSED(mask);
     
     readlen = PROTO_IOBUF_LEN;
-
-    qblen = sdslen(c->querybuf);
-    if (c->querybuf_peak < qblen) c->querybuf_peak = qblen;
-    c->querybuf = sdsMakeRoomFor(c->querybuf, readlen);
-    nread = read(fd, c->querybuf+qblen, readlen);
-    printf("%s\n", c->querybuf+qblen );
+//
+//    qblen = sdslen(c->querybuf);
+//    if (c->querybuf_peak < qblen) c->querybuf_peak = qblen;
+//    c->querybuf = sdsMakeRoomFor(c->querybuf, readlen);
+    nread = read(fd, c->querybuf, readlen);
+    printf("buffer: %s\n", c->querybuf);
     if (nread == -1) {
         if (errno == EAGAIN) {
             return;

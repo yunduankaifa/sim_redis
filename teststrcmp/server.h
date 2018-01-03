@@ -26,6 +26,8 @@
 #define CONFIG_DEFAULT_TCP_KEEPALIVE 300
 #define PROTO_IOBUF_LEN         (1024*16)  /* Generic I/O buffer size */
 
+#define AOF_FILE_PATH   "aof_file.txt"
+
 typedef long long mstime_t;
 
 void acceptTcpHandler(aeEventLoop *el, int fd, void *clientData, int mask);
@@ -59,6 +61,8 @@ typedef struct redisServer {
     char neterr[ANET_ERR_LEN];
     int tcpkeepalive;
     list *clients;
+    
+    sds aof_buffer;
     unsigned long stat_rejected_conn;
     unsigned long stat_numconnections;
     
