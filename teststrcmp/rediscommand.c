@@ -20,7 +20,7 @@ int getCommand(client *c) {
     sds msg;
     msg = dbGetKey(server.db, c->argv[1]);
     if (msg == NULL) {
-        msg = sdsMakeRoomFor(msg, sizeof("(nil)\0"));
+ //       msg = sdsMakeRoomFor(msg, sizeof("(nil)\0"));
         msg = sdscat(msg, "(nil)\0");
     }
     if(send(c->fd, msg, sdslen(msg), 0)<0) {
@@ -32,12 +32,12 @@ int getCommand(client *c) {
 //存入内存，并且给客户端写执行结果
 
 int setCommand(client *c) {
-    sds msg = malloc(sizeof(char)*256);
+    sds msg = sdsempty(); //  malloc(sizeof(char)*256);
     if (!dbSetKey(server.db, c->argv[1], c->argv[2])) {
-        msg = sdsMakeRoomFor(msg, sizeof("ok!\0"));
+   //     msg = sdsMakeRoomFor(msg, sizeof("ok!\0"));
         msg = sdscat(msg, "ok!\0");
     } else {
-        msg = sdsMakeRoomFor(msg, sizeof("key already exist!\0"));
+ //       msg = sdsMakeRoomFor(msg, sizeof("key already exist!\0"));
         msg = sdscat(msg, "key already exist!\0");
     }
     
