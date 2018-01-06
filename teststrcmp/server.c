@@ -21,6 +21,7 @@ int main (int argc, char *argv[]) {
     server.el = aeCreateEventLoop(server.maxclients+CONFIG_FDSET_INCR);
     server.clients = listCreate();
     server.db = createDb();
+    server.aof_buffer = sdsempty();
 
     server.listenfd = anetTcpServer(server.port, server.tcp_backlog);
     if (server.listenfd < 0) {

@@ -134,7 +134,11 @@ void processInputBuffer(client *c) {
     c->argv = sdssplitargs(c->querybuf, &(c->argc));
     if (c->argc == 0) return;
     redisCommand *ci = createCommand(c);
-    if (ci) ci->proc(c);
+    if (ci && !ci->proc(c)) {
+        sdscat(server.aof_buffer, c->querybuf);
+        sdsclear(c->querybuf);
+        printf("aof_buffer: %s\n", server.aof_buffer);
+    }
 }
 
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
