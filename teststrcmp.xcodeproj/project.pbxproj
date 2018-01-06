@@ -18,6 +18,7 @@
 		224A89A31FE813CD004C7F9C /* endianconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A899D1FE813CD004C7F9C /* endianconv.c */; };
 		224A89A41FE813CD004C7F9C /* zmalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A899F1FE813CD004C7F9C /* zmalloc.c */; };
 		224A89A81FE832FF004C7F9C /* sds.c in Sources */ = {isa = PBXBuildFile; fileRef = 224A89A61FE832FF004C7F9C /* sds.c */; };
+		2252220B200077D5008DFB83 /* aof.c in Sources */ = {isa = PBXBuildFile; fileRef = 22522209200077D5008DFB83 /* aof.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +57,8 @@
 		224A89A51FE81453004C7F9C /* sdsalloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdsalloc.h; sourceTree = "<group>"; };
 		224A89A61FE832FF004C7F9C /* sds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sds.c; sourceTree = "<group>"; };
 		224A89A71FE832FF004C7F9C /* sds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sds.h; sourceTree = "<group>"; };
+		22522209200077D5008DFB83 /* aof.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aof.c; sourceTree = "<group>"; };
+		2252220A200077D5008DFB83 /* aof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aof.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				224A89931FE6E9E2004C7F9C /* redisdb.h */,
 				224A89951FE6F2C7004C7F9C /* rediscommand.c */,
 				224A89961FE6F2C7004C7F9C /* rediscommand.h */,
+				22522209200077D5008DFB83 /* aof.c */,
+				2252220A200077D5008DFB83 /* aof.h */,
 			);
 			path = teststrcmp;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2252220B200077D5008DFB83 /* aof.c in Sources */,
 				224A89A81FE832FF004C7F9C /* sds.c in Sources */,
 				222CD1871FD398500078396F /* server.c in Sources */,
 				224A89A41FE813CD004C7F9C /* zmalloc.c in Sources */,

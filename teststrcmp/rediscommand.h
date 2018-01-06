@@ -11,10 +11,10 @@
 
 #include <stdio.h>
 #include "server.h"
-typedef void redisCommandProc(client *c);
+typedef int redisCommandProc(client *c);
 typedef void redisGetKeysProc();
-void getCommand(client *c);
-void setCommand(client *c);
+int getCommand(client *c);
+int setCommand(client *c);
 
 typedef struct redisCommand {
     char *name;
