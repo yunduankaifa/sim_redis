@@ -21,7 +21,7 @@ int getCommand(client *c) {
     msg = dbGetKey(server.db, c->argv[1]);
     if (msg == NULL) {
         msg = sdsempty();
-        msg = sdscat(msg, "(nil)\0");
+        msg = sdscat(msg, "(nil)");
     }
     if(send(c->fd, msg, sdslen(msg), 0)<0) {
         return 1;
@@ -34,9 +34,9 @@ int getCommand(client *c) {
 int setCommand(client *c) {
     sds msg = sdsempty(); 
     if (!dbSetKey(server.db, c->argv[1], c->argv[2])) {
-        msg = sdscat(msg, "ok!\0");
+        msg = sdscat(msg, "ok!");
     } else {
-        msg = sdscat(msg, "key already exist!\0");
+        msg = sdscat(msg, "key already exist!");
     }
     
     if (send(c->fd, msg, sdslen(msg), 0) < 0 ) {

@@ -134,7 +134,7 @@ void processInputBuffer(client *c) {
     c->argv = sdssplitargs(c->querybuf, &(c->argc));
     if (c->argc == 0) return;
     redisCommand *ci = createCommand(c);
-    if (ci && !ci->proc(c)) {
+    if (ci && !ci->proc(c) && strcmp(ci->name, "set")==0 ) {
         server.aof_buffer = sdscat(server.aof_buffer, c->querybuf);
         if (server.aof_buffer == NULL) perror("allocate for aof_buffer error");
         else printf("aof_buffer: %s\n", server.aof_buffer);
