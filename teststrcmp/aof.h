@@ -11,8 +11,10 @@
 
 #include <stdio.h>
 #include "sds.h"
+#include "redisdb.h"
 
 int createAofHandler(const char *const filePath);
 int writeAofBufferToFile(const sds aof_buf);
+int loadAofFile();
 
 #endif /* aof_h */

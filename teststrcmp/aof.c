@@ -7,7 +7,8 @@
 //
 
 #include "aof.h"
-#include "sds.h"
+#include "rediscommand.h"
+#include "networking.c"
 #include <errno.h>
 #include <unistd.h>
 //#include <sys/file.h>
@@ -17,7 +18,7 @@
 FILE *aof_handler=NULL;
 
 int createAofHandler(const char *const filePath) {
-    aof_handler = fopen(filePath, "a");
+    aof_handler = fopen(filePath, "a+");
     if (!aof_handler) return errno;
     return 0;
 }
@@ -38,4 +39,16 @@ int writeAofBufferToFile(const sds aof_buf) {
     else return 1;
 }
 
+
+int loadAofFile() {
+    client *fake_client = createFakeClient();
+    if (!fake_client) return 1;
+
+    if (aof_handler == NULL) return 1;
+    while (!feof(aof_handler)) {
+        fgets(fake_client->querybuf, 256, aof_handler);
+        processInputBuffer(fake_client, 0);
+    }
+    return 0;
+}
 

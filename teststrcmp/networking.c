@@ -53,6 +53,24 @@ client *createClient(int fd) {
     return c;
 }
 
+client *createFakeClient() {
+    client *c = NULL;
+    c = malloc(sizeof(client));
+    c->flags = 0;
+    c->querybuf = sdsempty();
+    c->querybuf = sdsMakeRoomFor(c->querybuf, PROTO_IOBUF_LEN);
+    
+    // 查询缓冲区峰值
+    c->querybuf_peak = 0;
+    c->argc = 0;
+    c->argv = NULL;
+
+    listAddNodeTail(server.clients,c);
+    
+    return c;
+}
+
+
 void freeClient(client *c) {
     close(c->fd);
     sdsfree(c->pending_querybuf);
@@ -129,7 +147,7 @@ void getArgFromBuffer(sds buffer, sds *argv, int *argc) {
 }
 
 
-void processInputBuffer(client *c) {
+void processInputBuffer(client *c, int aof_flag) {
     if (c == NULL) return;
     c->argv = sdssplitargs(c->querybuf, &(c->argc));
     if (c->argc == 0) return;
@@ -140,7 +158,7 @@ void processInputBuffer(client *c) {
         else printf("aof_buffer: %s\n", server.aof_buffer);
     }
     sdsclear(c->querybuf);
-    if (writeAofBufferToFile(server.aof_buffer) !=0 ) {
+    if (aof_flag && writeAofBufferToFile(server.aof_buffer) !=0 ) {
         perror("writeAofBufferToFile error!\n");
     }
 }
@@ -169,7 +187,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
         return;
     }
     
-    processInputBuffer(c);
+    processInputBuffer(c, 1);
     
 }
 
