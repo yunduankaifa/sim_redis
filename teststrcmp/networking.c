@@ -135,10 +135,11 @@ void processInputBuffer(client *c) {
     if (c->argc == 0) return;
     redisCommand *ci = createCommand(c);
     if (ci && !ci->proc(c)) {
-        sdscat(server.aof_buffer, c->querybuf);
-        sdsclear(c->querybuf);
-        printf("aof_buffer: %s\n", server.aof_buffer);
+        server.aof_buffer = sdscat(server.aof_buffer, c->querybuf);
+        if (server.aof_buffer == NULL) perror("allocate for aof_buffer error");
+        else printf("aof_buffer: %s\n", server.aof_buffer);
     }
+    sdsclear(c->querybuf);
 }
 
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
@@ -148,10 +149,7 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     UNUSED(mask);
     
     readlen = PROTO_IOBUF_LEN;
-//
-//    qblen = sdslen(c->querybuf);
-//    if (c->querybuf_peak < qblen) c->querybuf_peak = qblen;
-//    c->querybuf = sdsMakeRoomFor(c->querybuf, readlen);
+
     nread = read(fd, c->querybuf, readlen);
     printf("buffer: %s\n", c->querybuf);
     if (nread == -1) {
