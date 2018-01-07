@@ -45,7 +45,7 @@ redisDb* createDb();
 
 unsigned long getHashIndex(sds key);
 
-int isKeyExist(dictEnty *el, sds key);
+dictEnty *isKeyExist(dictEnty *el, sds key);
 int dbSetKey(redisDb *db, sds key, sds value);
 sds dbGetKey(redisDb *db, sds key);
 

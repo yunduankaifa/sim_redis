@@ -25,30 +25,32 @@ unsigned long getHashIndex(sds key) {
     return key[0];
 }
 
-int isKeyExist(dictEnty *el, sds key) {
+dictEnty *isKeyExist(dictEnty *el, sds key) {
     while (el != NULL) {
-        if (strcmp(el->key, key) == 0) return 1;
+        if (strcmp(el->key, key) == 0) break;
         else el = el->next;
     }
     
-    return 0;
+    return el;
 }
 
 int dbSetKey(redisDb *db, sds key, sds value) {
-    dictEnty *enty = malloc(sizeof(dictEnty));
+    dictEnty *new_enty=NULL, *old_enty=NULL;
     unsigned long index = 0;
     index = getHashIndex(key);
-    if (!isKeyExist(db->dict->ht.table[index], key)) {
-        enty->key = key;
-        enty->v   = value;
-        enty->next = db->dict->ht.table[index];
-        db->dict->ht.table[index] = enty;
+    if (!(old_enty=isKeyExist(db->dict->ht.table[index], key))) {
+        new_enty = malloc(sizeof(dictEnty));
+        if (!new_enty) return 1;
+        new_enty->key = key;
+        new_enty->v   = value;
+        new_enty->next = db->dict->ht.table[index];
+        db->dict->ht.table[index] = new_enty;
         db->dict->ht.used++;
-        return 0;
     }
     else {
-        return 1;
+        old_enty->v = value;
     }
+    return 0;
 }
 
 sds dbGetKey(redisDb *db, sds key) {
