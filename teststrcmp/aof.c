@@ -30,7 +30,11 @@ int writeAofBufferToFile(const sds aof_buf) {
     }
     
     if (sdslen(aof_buf)==0) return 0;
-    if (fputs(aof_buf, aof_handler)) return 0;
+    if (fputs(aof_buf, aof_handler)) {
+        sdsclear(aof_buf);
+        fflush(aof_handler);
+        return 0;
+    }
     else return 1;
 }
 
