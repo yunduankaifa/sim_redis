@@ -8,12 +8,12 @@
 
 #include "aof.h"
 #include "rediscommand.h"
-#include "networking.c"
 #include <errno.h>
 #include <unistd.h>
 //#include <sys/file.h>
 
-
+extern client *createFakeClient();
+extern void processInputBuffer(client *c, int aof_flag);
 
 FILE *aof_handler=NULL;
 
