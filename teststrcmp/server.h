@@ -16,6 +16,7 @@
 #include "ae.h"
 #include "sds.h"
 #include "redisdb.h"
+#include "aof.h"
 
 #define DEFAULT_PORT  8811
 #define TCP_BACKLOG   500

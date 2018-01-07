@@ -140,6 +140,9 @@ void processInputBuffer(client *c) {
         else printf("aof_buffer: %s\n", server.aof_buffer);
     }
     sdsclear(c->querybuf);
+    if (writeAofBufferToFile(server.aof_buffer) !=0 ) {
+        perror("writeAofBufferToFile error!\n");
+    }
 }
 
 void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {

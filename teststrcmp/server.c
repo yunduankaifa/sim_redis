@@ -22,8 +22,10 @@ int main (int argc, char *argv[]) {
     server.clients = listCreate();
     server.db = createDb();
     server.aof_buffer = sdsempty();
+    createAofHandler("aof.txt");
 
     server.listenfd = anetTcpServer(server.port, server.tcp_backlog);
+    
     if (server.listenfd < 0) {
         return -1;
     }

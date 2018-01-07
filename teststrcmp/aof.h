@@ -10,5 +10,9 @@
 #define aof_h
 
 #include <stdio.h>
+#include "sds.h"
+
+int createAofHandler(const char *const filePath);
+int writeAofBufferToFile(const sds aof_buf);
 
 #endif /* aof_h */

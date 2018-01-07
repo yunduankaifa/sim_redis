@@ -20,6 +20,7 @@ int getCommand(client *c) {
     sds msg;
     msg = dbGetKey(server.db, c->argv[1]);
     if (msg == NULL) {
+        msg = sdsempty();
         msg = sdscat(msg, "(nil)\0");
     }
     if(send(c->fd, msg, sdslen(msg), 0)<0) {
